@@ -25,4 +25,11 @@
   };
   # backwards compat; don't change
   system.stateVersion = 4;
+ homebrew = {
+    enable = true;
+    caskArgs.no_quarantine = true;
+    casks = [ "maccy" "amethyst" ];
+    taps = [ "fujiapple852/trippy" ];
+    brews = [ "trippy" ];
+  };
 }
