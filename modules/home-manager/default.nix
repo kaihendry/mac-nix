@@ -1,21 +1,13 @@
-{ pkgs, pwnvim, ... }: {
+{ pkgs, ... }: {
   # Don't change this when you change package input. Leave it alone.
   home.stateVersion = "22.11";
   # specify my home-manager configs
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    curl
-    less
-    pwnvim.packages."aarch64-darwin".default
-  ];
+  home.packages = with pkgs; [ ripgrep fd curl less neovim duf ];
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
     EDITOR = "nvim";
   };
-  programs.bat.enable = true;
-  programs.bat.config.theme = "TwoDark";
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
   programs.exa.enable = true;
@@ -26,8 +18,9 @@
   programs.zsh.enableSyntaxHighlighting = true;
   programs.zsh.shellAliases = {
     ls = "ls --color=auto -F";
-    nixswitch = "darwin-rebuild switch --flake ~/src/system-config/.#";
-    nixup = "pushd ~/src/system-config; nix flake update; nixswitch; popd";
+    ll = "exa -alh";
+    nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
+    nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
   };
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;

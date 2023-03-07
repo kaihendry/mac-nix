@@ -13,10 +13,8 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Tricked out nvim
-    pwnvim.url = "github:zmre/pwnvim";
   };
-  outputs = inputs@{ nixpkgs, home-manager, darwin, pwnvim, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
     darwinConfigurations.kaim1pro = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
@@ -27,7 +25,6 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit pwnvim; };
             users.nixdemo.imports = [ ./modules/home-manager ];
           };
         }
