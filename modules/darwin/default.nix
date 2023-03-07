@@ -3,7 +3,6 @@
   programs.zsh.enable = true;
   programs.bash.enable = true;
   environment = {
-    loginShell = pkgs.zsh;
     systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];

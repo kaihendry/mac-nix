@@ -16,7 +16,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
   };
-  outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, darwin,  ... }: {
     nix.settings.auto-optimise-store = true;
     darwinConfigurations.kaim1pro = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
