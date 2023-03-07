@@ -2,7 +2,7 @@
   # Don't change this when you change package input. Leave it alone.
   home.stateVersion = "22.11";
   # specify my home-manager configs
-  home.packages = with pkgs; [ ripgrep fd curl less neovim duf ];
+  home.packages = with pkgs; [ ripgrep fd curl less neovim duf zellij ];
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
@@ -32,6 +32,16 @@
     enable = true;
     settings.font.normal.family = "MesloLGS Nerd Font Mono";
     settings.font.size = 16;
+    settings = {
+      shell = {
+        program = "${pkgs.zellij}/bin/zellij";
+        args = [
+          "options"
+          "--default-shell"
+          "/run/current-system/sw/bin/bash"
+        ];
+      };
+	};
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
 }
