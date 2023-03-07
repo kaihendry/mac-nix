@@ -44,6 +44,19 @@ enableZshIntegration = true;
           "/run/current-system/sw/bin/bash"
         ];
       };
+
+
+        key_bindings = [
+  { key= "N";         mods= "Command";      action= "SpawnNewInstance";       }
+  { key= "Space";     mods= "Alt";          chars= " ";                     }
+  { key= "Back"; mods= "Super"; chars= "\x15"; } 
+  { key= "Left";     mods= "Alt";     chars= "\x1bb";                       }
+  { key= "Right";    mods= "Alt";     chars= "\x1bf";                       }
+  { key= "Left";     mods= "Command"; chars= "\x1bOH";   mode= "AppCursor";   }
+  { key= "Right";    mods= "Command"; chars= "\x1bOF";   mode= "AppCursor";   }
+	];
+
+
 	};
   };
  home.file = {
