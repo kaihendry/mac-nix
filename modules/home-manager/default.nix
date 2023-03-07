@@ -8,22 +8,23 @@
     CLICLOLOR = 1;
     EDITOR = "nvim";
   };
+  # https://nix-community.github.io/home-manager/options.html
+  programs.zoxide.enable = true;
+  programs.zoxide.enableBashIntegration = true;
   programs.fzf.enable = true;
-  programs.fzf.enableZshIntegration = true;
+  programs.fzf.enableBashIntegration = true;
   programs.exa.enable = true;
   programs.git.enable = true;
-  programs.zsh.enable = true;
-  programs.zsh.enableCompletion = true;
-  programs.zsh.enableAutosuggestions = true;
-  programs.zsh.enableSyntaxHighlighting = true;
-  programs.zsh.shellAliases = {
+  programs.bash.enable = true;
+  programs.bash.enableCompletion = true;
+  programs.bash.shellAliases = {
     ls = "ls --color=auto -F";
     ll = "exa -alh";
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
   };
   programs.starship.enable = true;
-  programs.starship.enableZshIntegration = true;
+  programs.starship.enableBashIntegration = true;
   programs.alacritty = {
     enable = true;
     settings.font.normal.family = "MesloLGS Nerd Font Mono";
