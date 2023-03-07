@@ -17,7 +17,7 @@
     pwnvim.url = "github:zmre/pwnvim";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, pwnvim, ... }: {
-    darwinConfigurations.Demos-Virtual-Machine = darwin.lib.darwinSystem {
+    darwinConfigurations.kaim1pro = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
       modules = [
@@ -28,7 +28,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = { inherit pwnvim; };
-            users.demo.imports = [ ./modules/home-manager ];
+            users.nixdemo.imports = [ ./modules/home-manager ];
           };
         }
       ];

@@ -2,7 +2,6 @@
   # here go the darwin preferences and config items
   programs.zsh.enable = true;
   environment = {
-    shells = with pkgs; [ bash zsh ];
     loginShell = pkgs.zsh;
     systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
@@ -26,13 +25,4 @@
   };
   # backwards compat; don't change
   system.stateVersion = 4;
-  homebrew = {
-    enable = true;
-    caskArgs.no_quarantine = true;
-    global.brewfile = true;
-    masApps = { };
-    casks = [ "raycast" "amethyst" ];
-    taps = [ "fujiapple852/trippy" ];
-    brews = [ "trippy" ];
-  };
 }
