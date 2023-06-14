@@ -28,7 +28,7 @@
  homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
-    casks = [ "maccy" "amethyst" ];
+    casks = [ "maccy" "flameshot" ];
     taps = [ "fujiapple852/trippy" ];
     brews = [ "trippy" ];
   };
