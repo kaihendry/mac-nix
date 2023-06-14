@@ -1,2 +1,2 @@
 switch:
-	darwin-rebuild switch -I darwin-config=$(HOME)/mac-nix/modules/darwin/default.nix 
+	darwin-rebuild switch --flake .#kaim1pro
