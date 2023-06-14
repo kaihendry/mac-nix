@@ -28,7 +28,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.nixdemo.imports = [ ./modules/home-manager ];
+            users.hendry.imports = [ ./modules/home-manager ];
           };
         }
       ];
