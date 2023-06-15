@@ -60,7 +60,6 @@ enableZshIntegration = true;
 	};
   };
  home.file = {
-	".inputrc".source = ./dotfiles/inputrc;
         ".gitconfig".source = ./dotfiles/gitconfig;
 	  };
 }

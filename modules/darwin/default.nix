@@ -20,15 +20,13 @@
     finder._FXShowPosixPathInTitle = true;
     dock.autohide = true;
     NSGlobalDomain.AppleShowAllExtensions = true;
-    NSGlobalDomain.InitialKeyRepeat = 14;
-    NSGlobalDomain.KeyRepeat = 1;
   };
   # backwards compat; don't change
   system.stateVersion = 4;
  homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
-    casks = [ "maccy" "flameshot" ];
+    casks = [ "maccy" "flameshot" "visual-studio-code" "alacritty" ];
     taps = [ "fujiapple852/trippy" ];
     brews = [ "trippy" ];
   };
