@@ -12,6 +12,10 @@
   '';
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
+
+  # Add ability to used TouchID for sudo authentication
+  security.pam.enableSudoTouchIdAuth = true;
+
   fonts.fontDir.enable = true; # DANGER
   fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
   services.nix-daemon.enable = true;
@@ -23,11 +27,10 @@
   };
   # backwards compat; don't change
   system.stateVersion = 4;
- homebrew = {
+  homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
+    # use home brew to install packages for spotlight to work
     casks = [ "maccy" "flameshot" "visual-studio-code" "alacritty" ];
-    taps = [ "fujiapple852/trippy" ];
-    brews = [ "trippy" ];
   };
 }

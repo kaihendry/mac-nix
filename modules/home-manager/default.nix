@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   # Don't change this when you change package input. Leave it alone.
   home.stateVersion = "22.11";
-  # specify my home-manager configs
-  home.packages = with pkgs; [ ripgrep fd curl less neovim duf zellij ];
+
+  home.packages = with pkgs; [ ripgrep fd jq curl less neovim duf zellij awscli2 nixpkgs-fmt ];
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
@@ -11,9 +11,9 @@
   # https://nix-community.github.io/home-manager/options.html
   programs.zoxide = {
     enable = true;
-    options = ["--cmd j"];
-enableBashIntegration = true;
-enableZshIntegration = true;
+    options = [ "--cmd j" ];
+    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
   programs.fzf.enable = true;
   programs.fzf.enableBashIntegration = true;
@@ -46,20 +46,20 @@ enableZshIntegration = true;
       };
 
 
-        key_bindings = [
-  { key= "N";         mods= "Command";      action= "SpawnNewInstance";       }
-  { key= "Space";     mods= "Alt";          chars= " ";                     }
-  { key= "Back"; mods= "Super"; chars= "\x15"; } 
-  { key= "Left";     mods= "Alt";     chars= "\x1bb";                       }
-  { key= "Right";    mods= "Alt";     chars= "\x1bf";                       }
-  { key= "Left";     mods= "Command"; chars= "\x1bOH";   mode= "AppCursor";   }
-  { key= "Right";    mods= "Command"; chars= "\x1bOF";   mode= "AppCursor";   }
-	];
+      key_bindings = [
+        { key = "N"; mods = "Command"; action = "SpawnNewInstance"; }
+        { key = "Space"; mods = "Alt"; chars = " "; }
+        { key = "Back"; mods = "Super"; chars = "\x15"; }
+        { key = "Left"; mods = "Alt"; chars = "\x1bb"; }
+        { key = "Right"; mods = "Alt"; chars = "\x1bf"; }
+        { key = "Left"; mods = "Command"; chars = "\x1bOH"; mode = "AppCursor"; }
+        { key = "Right"; mods = "Command"; chars = "\x1bOF"; mode = "AppCursor"; }
+      ];
 
 
-	};
+    };
   };
- home.file = {
-        ".gitconfig".source = ./dotfiles/gitconfig;
-	  };
+  home.file = {
+    ".gitconfig".source = ./dotfiles/gitconfig;
+  };
 }
