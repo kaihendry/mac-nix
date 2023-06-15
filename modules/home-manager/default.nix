@@ -38,11 +38,6 @@
     settings = {
       shell = {
         program = "${pkgs.zellij}/bin/zellij";
-        args = [
-          "options"
-          "--default-shell"
-          "/run/current-system/sw/bin/bash"
-        ];
       };
 
 
