@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   # here go the darwin preferences and config items
-  programs.zsh.enable = true;
   programs.bash.enable = true;
   environment = {
     systemPackages = [ pkgs.coreutils ];
@@ -16,7 +15,9 @@
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
 
-  fonts.fontDir.enable = true; # DANGER
+  users.users.hendry.home = "/Users/hendry";
+
+  fonts.fontDir.enable = true;
   fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
   services.nix-daemon.enable = true;
   system.defaults = {

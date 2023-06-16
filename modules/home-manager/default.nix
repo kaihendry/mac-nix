@@ -8,29 +8,28 @@
     CLICLOLOR = 1;
     EDITOR = "nvim";
   };
+
   # https://nix-community.github.io/home-manager/options.html
   programs.zoxide = {
     enable = true;
     options = [ "--cmd j" ];
     enableBashIntegration = true;
-    enableZshIntegration = true;
   };
   programs.fzf.enable = true;
   programs.fzf.enableBashIntegration = true;
-  programs.fzf.enableZshIntegration = true;
   programs.exa.enable = true;
   programs.exa.enableAliases = true;
   programs.git.enable = true;
-  programs.zsh.enable = true;
   programs.bash.enable = true;
   programs.bash.enableCompletion = true;
+
   programs.bash.shellAliases = {
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
   };
   programs.starship.enable = true;
   programs.starship.enableBashIntegration = true;
-  programs.starship.enableZshIntegration = true;
+
   programs.alacritty = {
     enable = true;
     settings.font.normal.family = "MesloLGS Nerd Font Mono";
@@ -39,8 +38,6 @@
       shell = {
         program = "${pkgs.zellij}/bin/zellij";
       };
-
-
       key_bindings = [
         { key = "N"; mods = "Command"; action = "SpawnNewInstance"; }
         { key = "Space"; mods = "Alt"; chars = " "; }
@@ -50,8 +47,6 @@
         { key = "Left"; mods = "Command"; chars = "\x1bOH"; mode = "AppCursor"; }
         { key = "Right"; mods = "Command"; chars = "\x1bOF"; mode = "AppCursor"; }
       ];
-
-
     };
   };
   home.file = {
