@@ -17,6 +17,11 @@
 
   users.users.hendry.home = "/Users/hendry";
 
+  networking = {
+    hostName = "kaim1pro";
+  };
+
+
   fonts.fontDir.enable = true;
   fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
   services.nix-daemon.enable = true;
@@ -24,7 +29,19 @@
     finder.AppleShowAllExtensions = true;
     finder._FXShowPosixPathInTitle = true;
     dock.autohide = true;
-    NSGlobalDomain.AppleShowAllExtensions = true;
+
+    NSGlobalDomain = {
+      "com.apple.sound.beep.feedback" = 0;
+      "com.apple.sound.beep.volume" = 0.0;
+      # allow key repeat
+      ApplePressAndHoldEnabled = false;
+      # delay before repeating keystrokes
+      InitialKeyRepeat = 15; # normal minimum is 15 (225 ms)
+      # delay between repeated keystrokes upon holding a key
+      KeyRepeat = 2; # normal minimum is 2 (30 ms)
+      AppleShowAllExtensions = true;
+      AppleShowScrollBars = "Automatic";
+    };
   };
   # backwards compat; don't change
   system.stateVersion = 4;
