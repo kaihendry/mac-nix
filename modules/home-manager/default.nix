@@ -2,7 +2,7 @@
   # Don't change this when you change package input. Leave it alone.
   home.stateVersion = "22.11";
 
-  home.packages = with pkgs; [ ripgrep fd jq curl less neovim duf zellij awscli2 nixpkgs-fmt tig ];
+  home.packages = with pkgs; [ ripgrep fd jq curl less neovim duf zellij awscli2 nixpkgs-fmt tig hugo ];
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
@@ -15,7 +15,7 @@
     options = [ "--cmd j" ];
     enableBashIntegration = true;
   };
-  
+
   programs.fzf.enable = true;
   programs.fzf.enableBashIntegration = true;
   programs.exa.enable = true;
@@ -26,6 +26,7 @@
 
   programs.bash.shellAliases = {
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
+    nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
   };
   programs.starship.enable = true;
