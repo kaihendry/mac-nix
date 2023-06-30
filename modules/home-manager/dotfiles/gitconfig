@@ -1,2 +1,9 @@
 [user]
 	email = hendry@iki.fi
+	name = Kai Hendry
+
+[push]
+	autoSetupRemote = true
+
+[pull]
+	rebase = true

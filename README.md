@@ -13,3 +13,5 @@ I use bash shell, not zsh.
 	~
 	❯ defaults read -g InitialKeyRepeat -currentHost
 	15
+
+
