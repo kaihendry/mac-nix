@@ -6,9 +6,11 @@
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
   };
+
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
+
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 
@@ -29,6 +31,10 @@
     defaults = {
       finder.AppleShowAllExtensions = true;
       finder._FXShowPosixPathInTitle = true;
+      # don't show desktop icons
+      finder.CreateDesktop = false;
+      #default to list view
+      finder.FXPreferredViewStyle = "Nlsv";
       dock.autohide = true;
 
       NSGlobalDomain = {
