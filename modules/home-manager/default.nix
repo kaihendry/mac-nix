@@ -2,7 +2,24 @@
   # Don't change this when you change package input. Leave it alone.
   home.stateVersion = "22.11";
 
-  home.packages = with pkgs; [ ripgrep fd jq curl less neovim duf zellij awscli2 nixpkgs-fmt tig hugo shellcheck ];
+  home.packages = with pkgs; [
+    colima
+    docker
+    docker-compose
+    awscli2
+    curl
+    duf
+    fd
+    hugo
+    jq
+    less
+    neovim
+    nixpkgs-fmt
+    ripgrep
+    shellcheck
+    tig
+    zellij
+  ];
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
