@@ -3,11 +3,11 @@
   home.stateVersion = "22.11";
 
   home.packages = with pkgs; [
+    awscli2
     colima
+    curl
     docker
     docker-compose
-    awscli2
-    curl
     duf
     fd
     hugo
@@ -18,13 +18,14 @@
     ripgrep
     shellcheck
     tig
+    watch
     zellij
   ];
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
     EDITOR = "nvim";
-    PATH = "$PATH:$HOME/go/bin";
+    PATH = "$PATH:$HOME/go/bin:/opt/homebrew/share/google-cloud-sdk/bin";
   };
 
   # https://nix-community.github.io/home-manager/options.html
@@ -46,6 +47,8 @@
   programs.direnv.enableBashIntegration = true;
 
   programs.bash.shellAliases = {
+    k = "kubectl";
+    sts = "aws sts get-caller-identity";
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
@@ -57,6 +60,7 @@
     enable = true;
     settings.font.normal.family = "MesloLGS Nerd Font Mono";
     settings.font.size = 16;
+    settings.selection.saveToClipboard = true;
   };
 
   home.file = {
