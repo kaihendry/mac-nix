@@ -22,6 +22,7 @@
     zellij
   ];
   home.sessionVariables = {
+    HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
     PAGER = "less";
     CLICLOLOR = 1;
     EDITOR = "nvim";
@@ -53,6 +54,17 @@
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
   };
+
+  programs.bash.initExtra = ''
+    PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+    shopt -s histappend
+
+    # search bash history
+    h () {
+      rg -a "$@" ~/bash_history/*
+    }
+  '';
+
   programs.starship.enable = true;
   programs.starship.enableBashIntegration = true;
 
