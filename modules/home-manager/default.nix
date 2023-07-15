@@ -119,7 +119,11 @@
     enable = true;
     settings.font.normal.family = "MesloLGS Nerd Font Mono";
     settings.font.size = 16;
-    settings.selection.saveToClipboard = true;
+    settings.selection.save_to_clipboard = true;
+    settings.cursor = {
+      style = "Block";
+      unfocused_hollow = true;
+    };
   };
 
   home.file = {
