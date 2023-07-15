@@ -1,3 +1,4 @@
+# https://nix-community.github.io/home-manager/options.html
 { pkgs, ... }: {
   # Don't change this when you change package input. Leave it alone.
   home.stateVersion = "22.11";
@@ -42,12 +43,40 @@
       enable = true;
       defaultEditor = true;
 
+      extraConfig = ''
+        set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
+        set shiftwidth=4
+        set softtabstop=4
+        set tabstop=4
+        set wildmode=longest,list,full
+        set wildmenu
+        autocmd ColorScheme * highlight Whitespace ctermfg=red guifg=#FF0000
+        autocmd BufWritePre * :%s/\s\+$//e
+        colorscheme dracula
+      '';
+
       plugins = [
         {
           plugin = pkgs.vimPlugins.vim-nix;
         }
         {
           plugin = pkgs.vimPlugins.vim-fugitive;
+        }
+        {
+          plugin = pkgs.vimPlugins.copilot-vim;
+        }
+        {
+          plugin = pkgs.vimPlugins.vim-commentary;
+        }
+        {
+          plugin = pkgs.vimPlugins.gitsigns-nvim;
+          type = "lua";
+          config = ''
+            require('gitsigns').setup({})
+          '';
+        }
+        {
+          plugin = pkgs.vimPlugins.dracula-vim;
         }
       ];
     };
