@@ -5,6 +5,7 @@
     systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
+    variables.EDITOR = "nvim";
   };
 
   nix.extraOptions = ''

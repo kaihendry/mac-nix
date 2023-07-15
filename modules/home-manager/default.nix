@@ -13,7 +13,6 @@
     hugo
     jq
     less
-    neovim
     nixpkgs-fmt
     ripgrep
     shellcheck
@@ -25,7 +24,6 @@
     HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
     PAGER = "less";
     CLICLOLOR = 1;
-    EDITOR = "nvim";
     PATH = "$PATH:$HOME/go/bin:/opt/homebrew/share/google-cloud-sdk/bin";
   };
 
@@ -35,6 +33,25 @@
     options = [ "--cmd j" ];
     enableBashIntegration = true;
   };
+
+  # neovim with vim-fugitive
+  programs.neovim =
+    {
+      viAlias = true;
+      vimAlias = true;
+      enable = true;
+      defaultEditor = true;
+
+      plugins = [
+        {
+          plugin = pkgs.vimPlugins.vim-nix;
+        }
+        {
+          plugin = pkgs.vimPlugins.vim-fugitive;
+        }
+      ];
+    };
+
 
   programs.fzf.enable = true;
   programs.fzf.enableBashIntegration = true;
@@ -48,6 +65,7 @@
   programs.direnv.enableBashIntegration = true;
 
   programs.bash.shellAliases = {
+    sloc = "scc -c --no-cocomo";
     k = "kubectl";
     sts = "aws sts get-caller-identity";
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
