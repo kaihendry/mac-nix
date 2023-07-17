@@ -53,6 +53,7 @@
         autocmd ColorScheme * highlight Whitespace ctermfg=red guifg=#FF0000
         autocmd BufWritePre * :%s/\s\+$//e
         colorscheme dracula
+        unmap Y
       '';
 
       plugins = [
@@ -95,6 +96,7 @@
 
   programs.bash.shellAliases = {
     sloc = "scc -c --no-cocomo";
+    archlinux = "docker run -it --rm --platform linux/amd64 archlinux";
     k = "kubectl";
     sts = "aws sts get-caller-identity";
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
