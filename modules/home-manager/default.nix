@@ -35,51 +35,57 @@
   };
 
   # neovim with vim-fugitive
-  programs.neovim =
-    {
-      viAlias = true;
-      vimAlias = true;
-      enable = true;
-      defaultEditor = true;
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    defaultEditor = true;
 
-      extraConfig = ''
-        set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
-        set shiftwidth=4
-        set softtabstop=4
-        set tabstop=4
-        set wildmode=longest,list,full
-        set wildmenu
-        autocmd ColorScheme * highlight Whitespace ctermfg=red guifg=#FF0000
-        autocmd BufWritePre * :%s/\s\+$//e
-        colorscheme dracula
-        unmap Y
-      '';
+    extraConfig = ''
+      set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
+      set shiftwidth=4
+      set softtabstop=4
+      set tabstop=4
+      set wildmode=longest,list,full
+      set wildmenu
+      autocmd ColorScheme * highlight Whitespace ctermfg=red guifg=#FF0000
+      autocmd BufWritePre * :%s/\s\+$//e
+      colorscheme dracula
+      set undofile
+      set ignorecase
+      unmap Y
 
-      plugins = [
-        {
-          plugin = pkgs.vimPlugins.vim-nix;
-        }
-        {
-          plugin = pkgs.vimPlugins.vim-fugitive;
-        }
-        {
-          plugin = pkgs.vimPlugins.copilot-vim;
-        }
-        {
-          plugin = pkgs.vimPlugins.vim-commentary;
-        }
-        {
-          plugin = pkgs.vimPlugins.gitsigns-nvim;
-          type = "lua";
-          config = ''
-            require('gitsigns').setup({})
-          '';
-        }
-        {
-          plugin = pkgs.vimPlugins.dracula-vim;
-        }
-      ];
-    };
+      " Jump to last cursor position when opening files
+      " See |last-position-jump|.
+      :au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    '';
+
+    plugins = [
+      {
+        plugin = pkgs.vimPlugins.vim-nix;
+      }
+      {
+        plugin = pkgs.vimPlugins.vim-fugitive;
+      }
+      {
+        plugin = pkgs.vimPlugins.copilot-vim;
+      }
+      {
+        plugin = pkgs.vimPlugins.vim-commentary;
+      }
+      {
+        plugin = pkgs.vimPlugins.gitsigns-nvim;
+        type = "lua";
+        config = ''
+          require('gitsigns').setup({})
+        '';
+      }
+      {
+        plugin = pkgs.vimPlugins.dracula-vim;
+      }
+    ];
+  };
 
 
   programs.fzf.enable = true;
