@@ -19,7 +19,6 @@
     shellcheck
     tig
     watch
-    zellij
   ];
   home.sessionVariables = {
     HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
@@ -126,6 +125,11 @@
       style = "Block";
       unfocused_hollow = true;
     };
+  };
+
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   home.file = {
