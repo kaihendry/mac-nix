@@ -86,7 +86,24 @@
   programs.fzf.enableBashIntegration = true;
   programs.exa.enable = true;
   programs.exa.enableAliases = true;
-  programs.git.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName = "Kai Hendry";
+    userEmail = "hendry@iki.fi";
+    aliases = {
+      prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+      root = "rev-parse --show-toplevel";
+    };
+    extraConfig = {
+      color.ui = true;
+      github.user = "kaihendry";
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      push.autoSetupRemote = true;
+    };
+  };
+
   programs.bash.enable = true;
   programs.bash.enableCompletion = true;
 
@@ -130,9 +147,5 @@
   programs.zellij = {
     enable = true;
     enableBashIntegration = true;
-  };
-
-  home.file = {
-    ".gitconfig".source = ./dotfiles/gitconfig;
   };
 }
