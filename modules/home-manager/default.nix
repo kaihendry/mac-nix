@@ -10,6 +10,8 @@
     docker
     docker-compose
     duf
+    google-cloud-sdk
+    kubectl
     fd
     hugo
     jq
@@ -24,7 +26,7 @@
     HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
     PAGER = "less";
     CLICLOLOR = 1;
-    PATH = "$PATH:$HOME/go/bin:/opt/homebrew/share/google-cloud-sdk/bin";
+    PATH = "$PATH:$HOME/go/bin";
   };
 
   # https://nix-community.github.io/home-manager/options.html
@@ -141,12 +143,20 @@
 
   programs.alacritty = {
     enable = true;
-    settings.font.normal.family = "MesloLGS Nerd Font Mono";
-    settings.font.size = 16;
-    settings.selection.save_to_clipboard = true;
-    settings.cursor = {
-      style = "Block";
-      unfocused_hollow = true;
+    settings = {
+      font = {
+        normal = {
+          family = "MesloLGS Nerd Font Mono";
+        };
+        size = 16;
+      };
+      selection = {
+        save_to_clipboard = true;
+      };
+      cursor = {
+        style = "Block";
+        unfocused_hollow = true;
+      };
     };
   };
 
