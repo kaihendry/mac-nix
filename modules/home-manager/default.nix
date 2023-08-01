@@ -13,6 +13,7 @@
     google-cloud-sdk
     kubectl
     fd
+    pre-commit
     hugo
     jq
     less
