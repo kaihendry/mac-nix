@@ -99,11 +99,9 @@
     ];
   };
 
-
   programs.fzf.enable = true;
   programs.fzf.enableBashIntegration = true;
   programs.exa.enable = true;
-
 
   programs.git = {
     enable = true;
@@ -151,12 +149,9 @@
 
   programs.starship.enable = true;
   programs.starship.enableBashIntegration = true;
-  # no email address
   programs.starship.settings = {
-    gcloud.disabled = true;
-    kubernetes.disabled = false;
+    gcloud.disabled = true; # no email address
   };
-
 
   programs.alacritty = {
     enable = true;
