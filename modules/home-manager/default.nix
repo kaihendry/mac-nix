@@ -10,13 +10,14 @@
     docker
     docker-compose
     duf
-     (google-cloud-sdk.withExtraComponents # gcloud components list
+    (google-cloud-sdk.withExtraComponents # gcloud components list
       (with google-cloud-sdk.components; [
         gke-gcloud-auth-plugin
         gcloud-man-pages
       ])
     )
     kubectl
+    kubecolor
     fd
     pre-commit
     hugo
@@ -101,7 +102,7 @@
   programs.fzf.enable = true;
   programs.fzf.enableBashIntegration = true;
   programs.exa.enable = true;
-  programs.exa.enableAliases = true;
+
 
   programs.git = {
     enable = true;
@@ -130,6 +131,7 @@
     sloc = "scc -c --no-cocomo";
     archlinux = "docker run -it --rm --platform linux/amd64 archlinux";
     k = "kubectl";
+    ll = "exa -alh --group-directories-first";
     sts = "aws sts get-caller-identity";
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixsearch = "nix search nixpkgs";
