@@ -18,6 +18,7 @@
     )
     kubectl
     kubecolor
+    kubectx
     fd
     pre-commit
     hugo
@@ -130,7 +131,7 @@
   programs.bash.shellAliases = {
     sloc = "scc -c --no-cocomo";
     archlinux = "docker run -it --rm --platform linux/amd64 archlinux";
-    k = "kubectl";
+    k = "kubecolor";
     ll = "exa -alh --group-directories-first";
     sts = "aws sts get-caller-identity";
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
@@ -150,6 +151,12 @@
 
   programs.starship.enable = true;
   programs.starship.enableBashIntegration = true;
+  # no email address
+  programs.starship.settings = {
+    gcloud.disabled = true;
+    kubernetes.disabled = false;
+  };
+
 
   programs.alacritty = {
     enable = true;
