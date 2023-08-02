@@ -10,11 +10,18 @@
     docker
     docker-compose
     duf
-    google-cloud-sdk
+     (google-cloud-sdk.withExtraComponents # gcloud components list
+      (with google-cloud-sdk.components; [
+        gke-gcloud-auth-plugin
+        gcloud-man-pages
+      ])
+    )
     kubectl
     fd
     pre-commit
     hugo
+    gosec
+    yajsv
     jq
     less
     nixpkgs-fmt
