@@ -46,7 +46,6 @@
     enableBashIntegration = true;
   };
 
-  # neovim with vim-fugitive
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -81,6 +80,9 @@
         plugin = pkgs.vimPlugins.vim-fugitive;
       }
       {
+        plugin = pkgs.vimPlugins.vim-rhubarb;
+      }
+      {
         plugin = pkgs.vimPlugins.copilot-vim;
       }
       {
@@ -94,7 +96,7 @@
         '';
       }
       {
-        plugin = pkgs.vimPlugins.dracula-vim;
+        plugin = pkgs.vimPlugins.dracula-vim; # dark colorscheme
       }
     ];
   };
