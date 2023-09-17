@@ -4,6 +4,10 @@
 
   home.packages = with pkgs; [
     awscli2
+    ko
+    go
+    gzip
+    httpie
     colima
     curl
     docker
@@ -137,6 +141,9 @@
   programs.starship.enableBashIntegration = true;
   programs.starship.settings = {
     gcloud.disabled = true; # no email address
+
+    git_commit.only_detached = false; # show hash of git commit
+
   };
 
   programs.alacritty = {
