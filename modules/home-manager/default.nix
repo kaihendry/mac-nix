@@ -91,7 +91,7 @@
 
   programs.fzf.enable = true;
   programs.fzf.enableBashIntegration = true;
-  programs.exa.enable = true;
+  programs.eza.enable = true;
 
   programs.git = {
     enable = true;
@@ -120,7 +120,7 @@
     sloc = "scc -c --no-cocomo";
     archlinux = "docker run -it --rm --platform linux/amd64 archlinux";
     k = "kubecolor";
-    ll = "exa -alh --group-directories-first";
+    ll = "eza -alh --group-directories-first";
     sts = "aws sts get-caller-identity";
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixsearch = "nix search nixpkgs";
@@ -133,7 +133,7 @@
 
     # search bash history
     h () {
-      rg -a "$@" ~/bash_history/*
+      rg -a --sort path "$@" ~/bash_history/
     }
   '';
 
