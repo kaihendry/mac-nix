@@ -62,7 +62,7 @@
         KeyRepeat = 2; # normal minimum is 2 (30 ms)
         AppleShowAllExtensions = true;
         # AppleShowScrollBars = "Automatic";
-        
+
         # Reduce window animations
         NSWindowResizeTime = 0.1;
 
@@ -81,6 +81,6 @@
     enable = true;
     caskArgs.no_quarantine = true;
     # use home brew to install packages for spotlight to work
-    casks = [ "maccy" "flameshot" "visual-studio-code" "alacritty" ];
+    casks = [ "raycast" "visual-studio-code" "alacritty" ];
   };
 }
