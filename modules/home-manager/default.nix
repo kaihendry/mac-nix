@@ -29,6 +29,7 @@
     yajsv
     jq
     less
+    m4
     nixpkgs-fmt
     ripgrep
     shellcheck
