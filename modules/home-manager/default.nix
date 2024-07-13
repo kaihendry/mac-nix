@@ -82,8 +82,8 @@
       vim-commentary
       vim-fugitive
       vim-nix
+      vim-go
       vim-rhubarb
-      copilot-vim
       dracula-vim
       gitsigns-nvim
     ];
