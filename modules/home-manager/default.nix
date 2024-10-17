@@ -112,6 +112,10 @@
   };
 
   programs.bash.enable = true;
+  programs.granted = {
+    enable = true;
+    # enableBashIntegration = true;
+  };
   programs.bash.enableCompletion = true;
 
   programs.direnv.enable = true;
@@ -126,6 +130,7 @@
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
+    assume = "source ${pkgs.granted}/bin/.assume-wrapped";
   };
 
   programs.bash.initExtra = ''
