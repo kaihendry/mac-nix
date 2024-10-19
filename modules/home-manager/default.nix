@@ -43,6 +43,10 @@
     PATH = "$PATH:$HOME/go/bin";
   };
 
+  home.sessionPath = [
+    "$HOME/bin"
+  ];
+
   # https://nix-community.github.io/home-manager/options.html
   programs.zoxide = {
     enable = true;
@@ -130,6 +134,7 @@
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
+    mine = "BROWSER=\"chrome --profile-directory='Profile 2' %s\" aws sso login --sso-session mine";
     assume = "source ${pkgs.granted}/bin/.assume-wrapped";
   };
 
