@@ -115,10 +115,6 @@
   };
 
   programs.bash.enable = true;
-  programs.granted = {
-    enable = true;
-    # enableBashIntegration = true;
-  };
   programs.bash.enableCompletion = true;
 
   programs.direnv.enable = true;
@@ -133,8 +129,7 @@
     nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
-    mine = "BROWSER='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --args --profile-directory=\"Profile 2\" %s' aws sso login --sso-session mine";
-    assume = "source ${pkgs.granted}/bin/.assume-wrapped";
+    assume = ". assume";
   };
 
   programs.bash.initExtra = ''
