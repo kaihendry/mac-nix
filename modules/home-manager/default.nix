@@ -26,6 +26,7 @@
     pre-commit
     hugo
     yajsv
+    parallel
     jq
     less
     m4

@@ -25,7 +25,7 @@
   };
 
 
-  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
+  fonts.packages = [pkgs.nerd-fonts.meslo-lg];
   services.nix-daemon.enable = true;
   system = {
     defaults = {
