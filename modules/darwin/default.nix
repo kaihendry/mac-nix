@@ -79,7 +79,6 @@
   homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
-    # use home brew to install packages for spotlight to work
-    casks = [ "raycast" "visual-studio-code" "ghostty" "whatsapp" "google-chrome"  ];
+    casks = [ "raycast" "visual-studio-code" "ghostty" "whatsapp" "google-chrome" ];
   };
 }

@@ -4,6 +4,7 @@
 
   home.packages = with pkgs; [
     awscli2
+    gh
     ko
     go
     gzip
