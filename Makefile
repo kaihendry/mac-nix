@@ -1,2 +1,2 @@
 switch:
-	darwin-rebuild switch --flake .#kaim1pro
+	nix run nix-darwin -- switch --flake ~/.config/nix-darwin
