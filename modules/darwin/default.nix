@@ -21,7 +21,7 @@
   users.users.hendry.home = "/Users/hendry";
 
   networking = {
-    hostName = "kaim1pro";
+    hostName = "RuthMBP";
   };
 
 
@@ -80,6 +80,6 @@
     enable = true;
     caskArgs.no_quarantine = true;
     # use home brew to install packages for spotlight to work
-    casks = [ "raycast" "visual-studio-code" "alacritty" ];
+    casks = [ "raycast" "visual-studio-code" "ghostty" "whatsapp" "google-chrome"  ];
   };
 }

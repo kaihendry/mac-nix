@@ -18,7 +18,7 @@
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
     nix.settings.auto-optimise-store = true;
-    darwinConfigurations.kaim1pro = darwin.lib.darwinSystem {
+    darwinConfigurations.RuthMBP = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
       modules = [
