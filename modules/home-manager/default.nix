@@ -127,9 +127,9 @@
     k = "kubecolor";
     ll = "eza -alh --group-directories-first";
     sts = "aws sts get-caller-identity";
-    nixswitch = "darwin-rebuild switch --flake ~/mac-nix/.#";
+    nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/.#";
     nixsearch = "nix search nixpkgs";
-    nixup = "pushd ~/mac-nix; nix flake update; nixswitch; popd";
+    nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
     assume = ". assume";
   };
 
