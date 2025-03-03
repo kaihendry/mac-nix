@@ -24,7 +24,6 @@
     kubectx
     fd
     pre-commit
-    hugo
     yajsv
     parallel
     jq
@@ -169,7 +168,4 @@
     };
   };
 
-  programs.zellij = {
-    enable = true;
-  };
 }

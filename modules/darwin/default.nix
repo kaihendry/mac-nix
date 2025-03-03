@@ -16,7 +16,7 @@
   system.keyboard.remapCapsLockToEscape = true;
 
   # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   users.users.hendry.home = "/Users/hendry";
 
@@ -24,9 +24,10 @@
     hostName = "kaim1pro";
   };
 
-
   fonts.packages = [pkgs.nerd-fonts.meslo-lg];
-  services.nix-daemon.enable = true;
+
+  ids.gids.nixbld = 350;
+
   system = {
     defaults = {
       finder.AppleShowAllExtensions = true;
@@ -72,6 +73,7 @@
     # backwards compat; don't change
     stateVersion = 4;
 
+
     activationScripts.postActivation.text = ''sudo chsh -s ${pkgs.bashInteractive}/bin/bash''; # Since it's not possible to declare default shell, run this command after build
 
   };
@@ -80,6 +82,6 @@
     enable = true;
     caskArgs.no_quarantine = true;
     # use home brew to install packages for spotlight to work
-    casks = [ "raycast" "visual-studio-code" "alacritty" "ghostty" ];
+    casks = [ "raycast" "alacritty" "ghostty" ];
   };
 }
