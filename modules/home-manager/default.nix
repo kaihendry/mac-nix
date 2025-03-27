@@ -40,6 +40,7 @@
     PAGER = "less";
     CLICLOLOR = 1;
     PATH = "$PATH:$HOME/go/bin";
+    _ZO_DOCTOR = "0";
   };
 
   home.sessionPath = [
@@ -129,7 +130,7 @@
     nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/.#";
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
-    assume = ". assume";
+    assume = ". assume"; # configured in .granted/config
   };
 
   programs.bash.initExtra = ''
