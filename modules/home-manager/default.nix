@@ -118,8 +118,8 @@
   programs.bash.enable = true;
   programs.bash.enableCompletion = true;
 
-  programs.direnv.enable = true;
-  programs.direnv.enableBashIntegration = true;
+  programs.direnv.enable = false;
+  programs.direnv.enableBashIntegration = false;
 
   programs.bash.shellAliases = {
     sloc = "scc -c --no-cocomo";
@@ -137,14 +137,17 @@
     PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
     shopt -s histappend
 
+    # Minimal prompt showing just dirname
+    PS1='\W \$ '
+
     # search bash history
     h () {
       rg -a --sort path "$@" ~/bash_history/
     }
   '';
 
-  programs.starship.enable = true;
-  programs.starship.enableBashIntegration = true;
+  programs.starship.enable = false;
+  programs.starship.enableBashIntegration = false;
   programs.starship.settings = {
     gcloud.disabled = true; # no email address
     git_commit.only_detached = false; # show hash of git commit

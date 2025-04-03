@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   # here go the darwin preferences and config items
-  programs.bash.enable = true;
   environment = {
     systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
@@ -32,8 +31,8 @@
     defaults = {
       finder.AppleShowAllExtensions = true;
       finder._FXShowPosixPathInTitle = true;
-      # don't show desktop icons
-      finder.CreateDesktop = false;
+      # show desktop icons
+      finder.CreateDesktop = true;
       # default to list view
       finder.FXPreferredViewStyle = "Nlsv";
       dock.autohide = true;
