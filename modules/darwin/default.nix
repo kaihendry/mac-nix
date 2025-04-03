@@ -72,7 +72,6 @@
     # backwards compat; don't change
     stateVersion = 4;
 
-
     activationScripts.postActivation.text = ''sudo chsh -s ${pkgs.bashInteractive}/bin/bash''; # Since it's not possible to declare default shell, run this command after build
 
   };
