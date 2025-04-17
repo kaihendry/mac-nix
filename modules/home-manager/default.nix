@@ -1,60 +1,61 @@
 # https://nix-community.github.io/home-manager/options.html
 { pkgs, ... }: {
-  home.stateVersion = "22.11";
-
-  home.packages = with pkgs; [
-    awscli2
-    ko
-    go
-    gzip
-    httpie
-    colima
-    curl
-    docker
-    docker-compose
-    duf
-    (google-cloud-sdk.withExtraComponents # gcloud components list
-      (with google-cloud-sdk.components; [
-        gke-gcloud-auth-plugin
-        gcloud-man-pages
-      ])
-    )
-    kubectl
-    kubecolor
-    kubectx
-    fd
-    pre-commit
-    yajsv
-    parallel
-    jq
-    less
-    m4
-    nixpkgs-fmt
-    ripgrep
-    shellcheck
-    tig
-    watch
-  ];
-  home.sessionVariables = {
-    HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
-    PAGER = "less";
-    CLICLOLOR = 1;
-    PATH = "$PATH:$HOME/go/bin";
-    _ZO_DOCTOR = "0";
+  home = {
+    stateVersion = "22.11";
+    packages = with pkgs; [
+      awscli2
+      ko
+      go
+      gzip
+      httpie
+      colima
+      curl
+      docker
+      docker-compose
+      duf
+      (google-cloud-sdk.withExtraComponents # gcloud components list
+        (with google-cloud-sdk.components; [
+          gke-gcloud-auth-plugin
+          gcloud-man-pages
+        ])
+      )
+      kubectl
+      kubecolor
+      kubectx
+      fd
+      pre-commit
+      yajsv
+      parallel
+      jq
+      less
+      m4
+      nixpkgs-fmt
+      ripgrep
+      shellcheck
+      tig
+      watch
+    ];
+    sessionVariables = {
+      HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
+      PAGER = "less";
+      CLICLOLOR = 1;
+      PATH = "$PATH:$HOME/go/bin";
+      _ZO_DOCTOR = "0";
+    };
+    sessionPath = [
+      "$HOME/bin"
+    ];
   };
 
-  home.sessionPath = [
-    "$HOME/bin"
-  ];
-
   # https://nix-community.github.io/home-manager/options.html
-  programs.zoxide = {
+  programs = {
+    zoxide = {
     enable = true;
     options = [ "--cmd j" ];
     enableBashIntegration = true;
-  };
+    };
 
-  programs.neovim = {
+    neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
@@ -92,10 +93,14 @@
       gitsigns-nvim
     ];
 
+    };
+
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+    };
   };
 
-  programs.fzf.enable = true;
-  programs.fzf.enableBashIntegration = true;
   programs.eza.enable = true;
 
   programs.git = {
