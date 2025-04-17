@@ -100,6 +100,7 @@
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "Kai Hendry";
     userEmail = "hendry@iki.fi";
     aliases = {
@@ -118,8 +119,8 @@
   programs.bash.enable = true;
   programs.bash.enableCompletion = true;
 
-  programs.direnv.enable = false;
-  programs.direnv.enableBashIntegration = false;
+  programs.direnv.enable = true;
+  programs.direnv.enableBashIntegration = true;
 
   programs.bash.shellAliases = {
     sloc = "scc -c --no-cocomo";
