@@ -12,6 +12,7 @@
   '';
 
   system = {
+    primaryUser = "hendry";
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
@@ -20,19 +21,17 @@
       finder = {
         AppleShowAllExtensions = true;
         _FXShowPosixPathInTitle = true;
-        CreateDesktop = true;
+        CreateDesktop = false;
         FXPreferredViewStyle = "Nlsv";
       };
       dock = {
         autohide = true;
-        autohide-delay = 0.01;
-        autohide-time-modifier = 0.01;
+        autohide-delay = 1.0e-2;
+        autohide-time-modifier = 1.0e-2;
         show-recents = false;
       };
       CustomSystemPreferences = {
-        NSGlobalDomain = {
-          NSWindowShouldDragOnGesture = true;
-        };
+        NSGlobalDomain = { NSWindowShouldDragOnGesture = true; };
       };
       NSGlobalDomain = {
         "com.apple.sound.beep.feedback" = 0;
@@ -49,16 +48,14 @@
     stateVersion = 4;
     activationScripts = {
       postActivation = {
-        text = ''sudo chsh -s ${pkgs.bashInteractive}/bin/bash'';
+        text = "sudo chsh -s ${pkgs.bashInteractive}/bin/bash";
       };
     };
   };
   security.pam.services.sudo_local.touchIdAuth = true;
   users.users.hendry.home = "/Users/hendry";
-  networking = {
-    hostName = "kaim1pro";
-  };
-  fonts.packages = [pkgs.nerd-fonts.meslo-lg];
+  networking = { hostName = "kaim1pro"; };
+  fonts.packages = [ pkgs.nerd-fonts.meslo-lg ];
   ids.gids.nixbld = 350;
 
   homebrew = {
