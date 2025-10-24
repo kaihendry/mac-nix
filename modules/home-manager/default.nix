@@ -1,5 +1,17 @@
 # https://nix-community.github.io/home-manager/options.html
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  pkl-neovim = pkgs.vimUtils.buildVimPlugin {
+    name = "pkl-neovim";
+    src = pkgs.fetchFromGitHub {
+      owner = "apple";
+      repo = "pkl-neovim";
+      rev = "ca2ed06979003c1cefc7c5e804d558cd53186ca2";
+      sha256 = "03wjqhi0s3b3v2k476wkz7ajm8s530jrbzs0c6c3yfy1w9wh9k1x";
+    };
+  };
+in
+{
   home = {
     stateVersion = "22.11";
     packages = with pkgs; [
@@ -14,10 +26,14 @@
       docker-compose
       duf
       (google-cloud-sdk.withExtraComponents # gcloud components list
-        (with google-cloud-sdk.components; [
-          gke-gcloud-auth-plugin
-          gcloud-man-pages
-        ]))
+        (
+          with google-cloud-sdk.components;
+          [
+            gke-gcloud-auth-plugin
+            gcloud-man-pages
+          ]
+        )
+      )
       kubectl
       kubecolor
       kubectx
@@ -38,6 +54,8 @@
     sessionVariables = {
       HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
       PAGER = "less";
+      AWS_PAGER = "";
+      LESS = "-R"; # tell less to allow raw control characters by default
       CLICLOLOR = 1;
       PATH = "$PATH:$HOME/go/bin";
       _ZO_DOCTOR = "0";
@@ -62,6 +80,35 @@
 
       extraConfig = ''
         lua require('gitsigns').setup()
+
+        " Pkl LSP configuration
+        lua << EOF
+        vim.g.pkl_neovim = {
+          start_command = { '/opt/homebrew/bin/pkl-lsp' }
+        }
+
+        -- Format on save for all files with LSP formatting support
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          pattern = "*",
+          callback = function()
+            vim.lsp.buf.format({ async = false })
+          end,
+        })
+        EOF
+
+        " Treesitter configuration
+        lua << EOF
+        require('nvim-treesitter.configs').setup {
+          ensure_installed = {},  -- Let Nix handle installation
+          highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+          },
+          indent = {
+            enable = true
+          },
+        }
+        EOF
 
         set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
         set shiftwidth=4
@@ -89,6 +136,17 @@
         vim-rhubarb
         dracula-vim
         gitsigns-nvim
+        pkl-neovim
+        (nvim-treesitter.withPlugins (p: [
+          p.bash
+          p.go
+          p.json
+          p.lua
+          p.nix
+          p.pkl
+          p.python
+          p.yaml
+        ]))
       ];
 
     };
@@ -104,14 +162,15 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "Kai Hendry";
-    userEmail = "hendry@iki.fi";
-    aliases = {
-      prettylog =
-        "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-      root = "rev-parse --show-toplevel";
-    };
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Kai Hendry";
+        email = "hendry@iki.fi";
+      };
+      alias = {
+        prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+        root = "rev-parse --show-toplevel";
+      };
       color.ui = true;
       github.user = "kaihendry";
       init.defaultBranch = "main";
@@ -164,10 +223,14 @@
     enable = true;
     settings = {
       font = {
-        normal = { family = "MesloLGS Nerd Font Mono"; };
+        normal = {
+          family = "MesloLGS Nerd Font Mono";
+        };
         size = 16;
       };
-      selection = { save_to_clipboard = true; };
+      selection = {
+        save_to_clipboard = true;
+      };
       cursor = {
         style = "Block";
         unfocused_hollow = true;

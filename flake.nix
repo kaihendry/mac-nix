@@ -1,10 +1,9 @@
 {
-  description = "my minimal flake";
+  description = "Home Manager configuration";
   inputs = {
     # Where we get most of our software. Giant mono repo with recipes
     # called derivations that say how to build software.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-22.11
-
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
@@ -16,22 +15,43 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
   };
-  outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
-    nix.settings.auto-optimise-store = true;
-    darwinConfigurations.kaim1pro = darwin.lib.darwinSystem {
+  outputs =
+    inputs@{
+      nixpkgs,
+      home-manager,
+      darwin,
+      ...
+    }:
+    let
       system = "aarch64-darwin";
-      pkgs = import nixpkgs { system = "aarch64-darwin"; };
-      modules = [
-        ./modules/darwin
-        home-manager.darwinModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.hendry.imports = [ ./modules/home-manager ];
-          };
-        }
-      ];
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      darwinConfigurations.kaim1pro = darwin.lib.darwinSystem {
+        inherit system pkgs;
+        modules = [
+          ./modules/darwin
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.hendry.imports = [ ./modules/home-manager ];
+            };
+            nix = {
+              optimise.automatic = true;
+              settings = {
+                experimental-features = [
+                  "nix-command"
+                  "flakes"
+                ];
+              };
+            };
+          }
+        ];
+      };
     };
-  };
 }
