@@ -50,6 +50,10 @@ in
       shellcheck
       tig
       watch
+      # LSP servers
+      nodePackages.vscode-json-languageserver
+      gopls
+      nil # Nix LSP
     ];
     sessionVariables = {
       HISTFILE = "$HOME/bash_history/$(date +%Y-%m)";
@@ -87,11 +91,56 @@ in
           start_command = { '/opt/homebrew/bin/pkl-lsp' }
         }
 
-        -- Format on save for all files with LSP formatting support
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          pattern = "*",
-          callback = function()
-            vim.lsp.buf.format({ async = false })
+        -- LSP configuration using new Neovim 0.11 API
+        -- Configure JSON LSP
+        vim.lsp.config.jsonls = {
+          cmd = { 'vscode-json-language-server', '--stdio' },
+          filetypes = { 'json', 'jsonc' },
+          root_markers = { 'package.json', '.git' },
+        }
+
+        -- Configure Gopls
+        vim.lsp.config.gopls = {
+          cmd = { 'gopls' },
+          filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+          root_markers = { { 'go.work', 'go.mod' }, '.git' },
+        }
+
+        -- Configure Nix LSP
+        vim.lsp.config['nil'] = {
+          cmd = { 'nil' },
+          filetypes = { 'nix' },
+          root_markers = { 'flake.nix', '.git' },
+        }
+
+        -- Enable all LSP servers
+        vim.lsp.enable({ 'jsonls', 'gopls', 'nil' })
+
+        -- Format on save for files with LSP support
+        vim.api.nvim_create_autocmd("LspAttach", {
+          group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+          callback = function(ev)
+            -- Format on save for this buffer
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = ev.buf,
+              callback = function()
+                vim.lsp.buf.format({ async = false })
+              end,
+            })
+          end,
+        })
+
+        -- Format pkl files using pkl eval on save
+        -- Note: pkl 0.30+ will have built-in formatting via 'pkl format'
+        -- See: https://github.com/apple/pkl/issues/442
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          pattern = "*.pkl",
+          callback = function(ev)
+            local file = vim.fn.expand("%:p")
+            local cmd = string.format("/opt/homebrew/bin/pkl eval %s -o %s", file, file)
+            vim.fn.system(cmd)
+            -- Reload the buffer to show formatted content
+            vim.cmd('edit!')
           end,
         })
         EOF
@@ -136,6 +185,7 @@ in
         vim-rhubarb
         dracula-vim
         gitsigns-nvim
+        nvim-lspconfig
         pkl-neovim
         (nvim-treesitter.withPlugins (p: [
           p.bash
