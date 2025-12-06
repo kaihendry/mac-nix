@@ -129,20 +129,6 @@ in
             })
           end,
         })
-
-        -- Format pkl files using pkl eval on save
-        -- Note: pkl 0.30+ will have built-in formatting via 'pkl format'
-        -- See: https://github.com/apple/pkl/issues/442
-        vim.api.nvim_create_autocmd("BufWritePost", {
-          pattern = "*.pkl",
-          callback = function(ev)
-            local file = vim.fn.expand("%:p")
-            local cmd = string.format("/opt/homebrew/bin/pkl eval %s -o %s", file, file)
-            vim.fn.system(cmd)
-            -- Reload the buffer to show formatted content
-            vim.cmd('edit!')
-          end,
-        })
         EOF
 
         " Treesitter configuration
@@ -245,7 +231,7 @@ in
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
     gemini = "npx https://github.com/google-gemini/gemini-cli";
-    claude = "npx @anthropic-ai/claude-code";
+    claude = "npx @anthropic-ai/claude-code --dangerously-skip-permissions";
     assume = ". assume"; # configured in .granted/config
   };
 
