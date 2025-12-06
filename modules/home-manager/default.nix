@@ -83,68 +83,6 @@ in
       defaultEditor = true;
 
       extraConfig = ''
-        lua require('gitsigns').setup()
-
-        " Pkl LSP configuration
-        lua << EOF
-        vim.g.pkl_neovim = {
-          start_command = { '/opt/homebrew/bin/pkl-lsp' }
-        }
-
-        -- LSP configuration using new Neovim 0.11 API
-        -- Configure JSON LSP
-        vim.lsp.config.jsonls = {
-          cmd = { 'vscode-json-language-server', '--stdio' },
-          filetypes = { 'json', 'jsonc' },
-          root_markers = { 'package.json', '.git' },
-        }
-
-        -- Configure Gopls
-        vim.lsp.config.gopls = {
-          cmd = { 'gopls' },
-          filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-          root_markers = { { 'go.work', 'go.mod' }, '.git' },
-        }
-
-        -- Configure Nix LSP
-        vim.lsp.config['nil'] = {
-          cmd = { 'nil' },
-          filetypes = { 'nix' },
-          root_markers = { 'flake.nix', '.git' },
-        }
-
-        -- Enable all LSP servers
-        vim.lsp.enable({ 'jsonls', 'gopls', 'nil' })
-
-        -- Format on save for files with LSP support
-        vim.api.nvim_create_autocmd("LspAttach", {
-          group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-          callback = function(ev)
-            -- Format on save for this buffer
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = ev.buf,
-              callback = function()
-                vim.lsp.buf.format({ async = false })
-              end,
-            })
-          end,
-        })
-        EOF
-
-        " Treesitter configuration
-        lua << EOF
-        require('nvim-treesitter.configs').setup {
-          ensure_installed = {},  -- Let Nix handle installation
-          highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-          },
-          indent = {
-            enable = true
-          },
-        }
-        EOF
-
         set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
         set shiftwidth=4
         set softtabstop=4
@@ -153,7 +91,6 @@ in
         set wildmenu
         autocmd ColorScheme * highlight Whitespace ctermfg=red guifg=#FF0000
         autocmd BufWritePre * :%s/\s\+$//e
-        colorscheme dracula
         set undofile
         set ignorecase
         unmap Y
@@ -162,29 +99,6 @@ in
         " See |last-position-jump|.
         :au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
       '';
-
-      plugins = with pkgs.vimPlugins; [
-        vim-commentary
-        vim-fugitive
-        vim-nix
-        vim-go
-        vim-rhubarb
-        dracula-vim
-        gitsigns-nvim
-        nvim-lspconfig
-        pkl-neovim
-        (nvim-treesitter.withPlugins (p: [
-          p.bash
-          p.go
-          p.json
-          p.lua
-          p.nix
-          p.pkl
-          p.python
-          p.yaml
-        ]))
-      ];
-
     };
 
     fzf = {
