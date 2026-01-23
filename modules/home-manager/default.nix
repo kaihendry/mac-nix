@@ -64,7 +64,7 @@ in
       PATH = "$PATH:$HOME/go/bin";
       _ZO_DOCTOR = "0";
     };
-    sessionPath = [ "$HOME/bin" ];
+    sessionPath = [ "$HOME/bin" "$HOME/.local/bin" ];
   };
 
   # https://nix-community.github.io/home-manager/options.html
@@ -145,7 +145,7 @@ in
     nixsearch = "nix search nixpkgs";
     nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
     gemini = "npx https://github.com/google-gemini/gemini-cli";
-    claude = "npx @anthropic-ai/claude-code --dangerously-skip-permissions";
+    superclaude = "~/.local/bin/claude --dangerously-skip-permissions";
     assume = ". assume"; # configured in .granted/config
   };
 
